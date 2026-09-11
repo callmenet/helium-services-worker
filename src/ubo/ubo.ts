@@ -276,7 +276,7 @@ const prepareFilterlist = async (path: string, env: Env, depth = 0): Promise<str
 };
 
 type Produced = {
-    bytes: ArrayBuffer;
+    bytes: Uint8Array;
     type: string;
     tag: string;
 };
@@ -314,7 +314,7 @@ async function produceContent(
         }
 
         return {
-            bytes: Resource.compress(data),
+            bytes: new TextEncoder().encode(data),
             type: options.type ?? 'text/plain; charset=utf-8',
             tag: await Resource.tag(data),
         };
@@ -333,7 +333,6 @@ const responseFor = (produced: Produced) => {
         'Cache-Control': 'public, max-age=3600',
         'Content-Type': produced.type,
         'Content-Length': String(produced.bytes.byteLength),
-        'Content-Encoding': 'br',
         'ETag': produced.tag,
         'Vary': 'Accept-Encoding',
     };
