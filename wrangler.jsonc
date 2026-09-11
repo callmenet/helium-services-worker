@@ -8,8 +8,8 @@
     "binding": "ASSETS"
   },
   "vars": {
-    "PROXY_BASE_URL": "https://helium-services-worker.yingo.workers.dev/ext",
-    "UBO_PROXY_BASE_URL": "https://helium-services-worker.yingo.workers.dev/ubo",
+    "PROXY_BASE_URL": "https://services.domain.invalid/ext",
+    "UBO_PROXY_BASE_URL": "https://services.domain.invalid/ubo",
     "CHROMIUM_FALLBACK_VERSION": "151.0.7922.71"
   }
 }
