@@ -50,8 +50,8 @@ Pushes to `main` deploy via `.github/workflows/deploy.yml`. The workflow typeche
 
 | Name | Type | Purpose |
 | ---- | ---- | ------- |
-| `PROXY_BASE_URL` | Variable | Public `/ext` base URL, e.g. `https://services.example.com/ext` |
-| `UBO_PROXY_BASE_URL` | Variable | Public `/ubo` base URL, e.g. `https://services.example.com/ubo` |
+| `PROXY_BASE_URL` | Secret | Public `/ext` base URL, e.g. `https://services.example.com/ext` |
+| `UBO_PROXY_BASE_URL` | Secret | Public `/ubo` base URL, e.g. `https://services.example.com/ubo` |
 | `CLOUDFLARE_API_TOKEN` | Secret | Cloudflare API token with Workers deploy permissions |
 | `CLOUDFLARE_ACCOUNT_ID` | Secret | Cloudflare account ID |
 | `HMAC_SECRET` | Secret | Signing secret (minimum 32 characters), synced as a Worker secret on each deploy |
