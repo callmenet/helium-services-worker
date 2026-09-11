@@ -1,0 +1,15 @@
+{
+  "name": "helium-services-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "PROXY_BASE_URL": "https://services.domain.invalid/ext",
+    "UBO_PROXY_BASE_URL": "https://services.domain.invalid/ubo",
+    "CHROMIUM_FALLBACK_VERSION": "151.0.7922.71"
+  }
+}
