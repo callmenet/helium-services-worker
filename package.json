@@ -8,7 +8,9 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "fetch-bangs": "curl -fsSL -o public/bangs.json https://raw.githubusercontent.com/imputnet/helium-services/main/svc/bangs/bangs.json"
+    "fetch-bangs": "curl -fsSL -o public/bangs.json https://raw.githubusercontent.com/imputnet/helium-services/main/svc/bangs/bangs.json",
+    "bump-ubo": "node scripts/bump-ubo.mjs",
+    "bump": "pnpm fetch-bangs && pnpm bump-ubo"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250904.0",

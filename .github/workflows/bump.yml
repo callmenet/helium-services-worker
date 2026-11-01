@@ -1,0 +1,60 @@
+name: bump
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: bump
+  cancel-in-progress: false
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm bump
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: pnpm typecheck
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "no changes"
+            exit 0
+          fi
+
+          branch=chore/bump-services
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          git add public/bangs.json src/ubo/assets-info.ts
+          git commit -m "chore: refresh upstream service data"
+          git fetch origin "$branch:refs/remotes/origin/$branch" || true
+          git push --force-with-lease origin "$branch"
+
+          number=$(gh pr list --head "$branch" --state all --json number --jq '.[0].number // empty')
+          state=$(gh pr list --head "$branch" --state all --json state --jq '.[0].state // empty')
+
+          if [ "$state" = "OPEN" ]; then
+            echo "updated PR #$number"
+          elif [ "$state" = "CLOSED" ]; then
+            gh pr reopen "$number"
+          else
+            gh pr create \
+              --base main \
+              --head "$branch" \
+              --title "chore: refresh upstream service data" \
+              --body "Automated refresh of the bang list and uBlock Origin asset pins. Merging deploys via the existing workflow."
+          fi

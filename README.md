@@ -23,10 +23,10 @@ In Helium, set your services origin to your Worker URL (e.g. `https://helium-ser
 pnpm install
 pnpm dev            # local server on http://localhost:8787
 pnpm typecheck
-pnpm fetch-bangs    # refresh the bang list from upstream
+pnpm bump           # refresh bangs and uBlock Origin asset pins
 ```
 
-Copy `.dev.vars` from the required secrets above for local runs. To follow a new uBlock release, bump the version pin and checksum in `src/ubo/assets-info.ts`.
+Copy `.dev.vars` from the required secrets above for local runs. A scheduled workflow runs `pnpm bump` daily, typechecks the result, and opens a pull request with any changes.
 
 ## License
 
