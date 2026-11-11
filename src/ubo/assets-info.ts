@@ -37,12 +37,12 @@ export const resolveUboEnv = (env: Env) => {
     }
 
     const VERSION_HELIUM = '1.74.0';
-    const VERSION_VANILLA = '1.74.0';
+    const VERSION_VANILLA = '1.76.0';
 
     const CSUM_HELIUM =
         '94d3de3dfccfe953be535961e4108773c5f5797291d69de07f8f1f831a361656';
     const CSUM_VANILLA =
-        '61488d15d26dfb7a8c73e8e2692ebf636300eb4fb6b98bc8356e317631487996';
+        'e994253fe9987f987149bec99bf366e1e3636f166e6acf444bfe0702fc15cfcc';
 
     const VERSION = useHeliumAssets ? VERSION_HELIUM : VERSION_VANILLA;
     const REPO = useHeliumAssets ? 'imputnet/uBlock' : 'gorhill/uBlock';
