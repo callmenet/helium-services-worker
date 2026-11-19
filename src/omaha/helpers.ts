@@ -7,6 +7,8 @@ export const APP_ID_REGEX = /^[a-p]{32}$/;
 const APPID_ALLOWLIST: Partial<Record<ServiceId, Set<string>>> = {
     'CHROME_COMPONENTS': new Set([
         'hfnkpimlhhgieaddgfemjhofmfblmnib',
+        'efniojlnjndmcbiieegkicadnoecjjef',
+        'giekcmmlnklenlaomppkphknjmnnpneh',
     ]),
 };
 
